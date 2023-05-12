@@ -1,0 +1,36 @@
+$iconsPath: "~assets/icons";
+
+.change-question-type-container {
+  .hsmx2-selector-block {
+    cursor: pointer;
+    display: grid;
+    grid-template-columns: repeat(2, 40%);
+    gap: 8px;
+    padding: 2px;
+    grid-auto-rows: minmax(28px);
+    margin-bottom: 8px;
+    border-radius: 1px;
+
+    .hover,
+    .icon {
+      background-position: center;
+      background: no-repeat;
+      background-position-y: center;
+      width: 24px;
+      height: 24px;
+      background-size: 24px;
+    }
+
+    .hover {
+      background-image: url(#{$iconsPath}/crossed-arrows-outlined-hover.png);
+    }
+
+    .icon {
+      background-image: url(#{$iconsPath}/crossed-arrows-outlined.png);
+    }
+
+    .text {
+      color: white;
+    }
+  }
+}

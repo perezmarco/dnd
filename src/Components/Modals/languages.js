@@ -70,6 +70,8 @@ const languages = {
     clickOnStarIcon: "Haz clic sobre el ícono con forma de estrella.",
     selectAndStartToMeasure:
       "Selecciona la meta de tu campaña y ¡Comienza a medir!",
+    hsmx2: "HSM x2",
+
   },
   en: {
     step0: "You have currently completed step 0 of 2",
@@ -141,6 +143,7 @@ const languages = {
     placeLink: "Places a link within the message of a basic block.",
     clickOnStarIcon: "Click on the star icon.",
     selectAndStartToMeasure: "Select your campaign goal and start measuring!",
+    hsmx2: "HSM x2",
   },
   pr: {
     step0: "Você concluiu atualmente a etapa 0 de 2",
@@ -213,6 +216,7 @@ const languages = {
     placeLink: "Coloca um link dentro da mensagem de um bloco básico.",
     clickOnStarIcon: "Clique no ícone da estrela.",
     selectAndStartToMeasure: "Selecione sua meta de campanha e comece a medir!",
+    hsmx2: "HSM x2",
   },
 };
 

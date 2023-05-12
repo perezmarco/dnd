@@ -8,6 +8,7 @@ import AnswerPortWidget from "./AnswerPortWidget";
 import { Droppable, Draggable, DragDropContext } from "react-beautiful-dnd";
 import { DefaultNodeModel, DefaultPortModel } from "DDCanvas/main";
 import SetGoalInNode from "Components/SetGoalInNode";
+import AddAlternateHSMInNode from "Components/AddAlternateHSMInNode";
 
 import events from "utils/events";
 
@@ -272,6 +273,7 @@ export class HSMNodeWidget extends React.Component {
             node={node}
             forceUpdate={this.forceUpdate.bind(this)}
           />
+          <AddAlternateHSMInNode />
         </div>
         <div
           className="question-node-v2 node-v2 hsm"

@@ -40,6 +40,7 @@
     "moment": "^2.27.0",
     "moment-range": "^4.0.2",
     "moment-timezone": "^0.5.40",
+    "n": "^9.1.0",
     "node-sass-chokidar": "^1.3.5",
     "node-uuid": "^1.4.8",
     "npm-run-all": "^4.1.5",
@@ -102,10 +103,11 @@
     "turndown": "^6.0.0",
     "uuid": "^3.3.3",
     "whatwg-fetch": "2.0.3",
-    "xlsx": "^0.18.5"
+    "xlsx": "^0.18.5",
+    "yarn": "^1.22.19"
   },
   "scripts": {
-    "start": "react-scripts start"
+    "start": "CHOKIDAR_USEPOLLING=true react-scripts start"
   },
   "devDependencies": {
     "@storybook/addon-actions": "^5.3.18",
