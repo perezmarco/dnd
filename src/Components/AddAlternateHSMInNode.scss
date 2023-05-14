@@ -11,7 +11,7 @@ $iconsPath: "~assets/icons";
     margin-bottom: 8px;
     border-radius: 1px;
 
-    .hover,
+    .focus-icon,
     .icon {
       background-position: center;
       background: no-repeat;
@@ -21,7 +21,7 @@ $iconsPath: "~assets/icons";
       background-size: 24px;
     }
 
-    .hover {
+    .focus-icon {
       background-image: url(#{$iconsPath}/crossed-arrows-outlined-hover.png);
     }
 
