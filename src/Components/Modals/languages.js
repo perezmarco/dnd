@@ -71,6 +71,7 @@ const languages = {
     selectAndStartToMeasure:
       "Selecciona la meta de tu campaña y ¡Comienza a medir!",
     hsmx2: "HSM x2",
+    createHsmx2: "Crear HSM x2",
 
   },
   en: {
@@ -144,6 +145,7 @@ const languages = {
     clickOnStarIcon: "Click on the star icon.",
     selectAndStartToMeasure: "Select your campaign goal and start measuring!",
     hsmx2: "HSM x2",
+    createHsmx2: "Create HSM x2",
   },
   pr: {
     step0: "Você concluiu atualmente a etapa 0 de 2",
@@ -217,6 +219,7 @@ const languages = {
     clickOnStarIcon: "Clique no ícone da estrela.",
     selectAndStartToMeasure: "Selecione sua meta de campanha e comece a medir!",
     hsmx2: "HSM x2",
+    createHsmx2: "Criar HSM x2",
   },
 };
 

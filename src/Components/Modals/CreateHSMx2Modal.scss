@@ -1,7 +1,7 @@
 $assetsPath: "~assets/images";
 $iconsPath: "~assets/icons";
 
-.create-target-event-modal {
+.create-hsmx2-modal {
   * {
     &::-webkit-scrollbar {
       width: 10px;
@@ -478,7 +478,7 @@ $iconsPath: "~assets/icons";
     }
 
     .create-buttons-container {
-      .create-goal-now {
+      .create-hsmx2 {
         width: 100%;
         height: 57px;
         background-color: #d6d6d6;
@@ -499,6 +499,34 @@ $iconsPath: "~assets/icons";
 
           &:hover {
             background-color: #8787fd;
+          }
+        }
+      }
+
+      .cancel-create {
+        width: 100%;
+        height: 57px;
+        background-color: #1a1a1a;
+
+
+        border-radius: 6px;
+        border: none;
+        cursor: not-allowed;
+
+        p {
+          margin: auto;
+          font-family: hk-grotesk-semibold;
+          font-size: 18px;
+          color: #ffffff;
+        }
+
+        &.is-valid {
+          cursor: pointer;
+
+          &:hover {
+            * {
+              color: #c5c5c5;
+            }
           }
         }
       }

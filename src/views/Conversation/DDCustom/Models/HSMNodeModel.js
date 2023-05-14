@@ -54,6 +54,8 @@ export class HSMNodeModel extends QuestionNodeModel {
     this.saveOnVariable = null;
     this.saveOnVariableType = null;
     this.orderedClosedPorts = [];
+    this.primaryNode = true;
+    this.alternateFlow = false;
   }
 
   deSerialize(object) {
@@ -138,15 +140,15 @@ export class HSMNodeModel extends QuestionNodeModel {
       .map((answer) => portsByContent[answer]);
   }
 
-  addAnswerClosedPort() {}
+  addAnswerClosedPort() { }
 
-  removeAnswerClosedPort(port) {}
+  removeAnswerClosedPort(port) { }
 
-  setText(text) {}
+  setText(text) { }
 
-  setAreHiddenClosedAnswers(val) {}
+  setAreHiddenClosedAnswers(val) { }
 
-  addNotAnswerTimeoutPort() {}
+  addNotAnswerTimeoutPort() { }
 
   getAnswerClosedPorts() {
     const outPorts = Object.values(this.getPorts()).filter(
