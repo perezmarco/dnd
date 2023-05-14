@@ -35,6 +35,7 @@ testem.log
 /typings
 dump.rdb
 package-lock.json
+yarn.lock
 
 # e2e
 /e2e/*.js

@@ -4,6 +4,7 @@ import {
   AnswerPortModel,
   ANSWER_PORT_TYPE_OPEN,
   ANSWER_PORT_TYPE_CLOSED,
+  ANSWER_PORT_TYPE_TIMEOUT,
   ANSWER_PORT_TYPE_DEFAULT_CLOSED,
 } from "./AnswerPortModel";
 
@@ -48,12 +49,18 @@ export class HSMNodeModel extends QuestionNodeModel {
         super.addPort(new AnswerPortModel(answer, answerType));
       });
     }
+
+    // Add port for timeout alternate workflow
+    super.addPort(new AnswerPortModel("", ANSWER_PORT_TYPE_TIMEOUT));
+
+
     this.hsm = hsm;
     this.webhookRead = null;
     this.webhookDelivered = null;
     this.saveOnVariable = null;
     this.saveOnVariableType = null;
     this.orderedClosedPorts = [];
+    this.primaryNode = true;
   }
 
   deSerialize(object) {
@@ -138,15 +145,15 @@ export class HSMNodeModel extends QuestionNodeModel {
       .map((answer) => portsByContent[answer]);
   }
 
-  addAnswerClosedPort() {}
+  addAnswerClosedPort() { }
 
-  removeAnswerClosedPort(port) {}
+  removeAnswerClosedPort(port) { }
 
-  setText(text) {}
+  setText(text) { }
 
-  setAreHiddenClosedAnswers(val) {}
+  setAreHiddenClosedAnswers(val) { }
 
-  addNotAnswerTimeoutPort() {}
+  addNotAnswerTimeoutPort() { }
 
   getAnswerClosedPorts() {
     const outPorts = Object.values(this.getPorts()).filter(
@@ -155,6 +162,14 @@ export class HSMNodeModel extends QuestionNodeModel {
     return outPorts.filter(
       (port) => port.answerType === ANSWER_PORT_TYPE_CLOSED
     );
+  }
+
+  getNotAnswerTimeoutPort() {
+    const [timeoutPort] = Object.values(this.getPorts()).filter(
+      (port) => port.answerType === ANSWER_PORT_TYPE_TIMEOUT
+    );
+
+    return timeoutPort
   }
 
   hasButtonLink() {

@@ -8,12 +8,14 @@ import AnswerPortWidget from "./AnswerPortWidget";
 import { Droppable, Draggable, DragDropContext } from "react-beautiful-dnd";
 import { DefaultNodeModel, DefaultPortModel } from "DDCanvas/main";
 import SetGoalInNode from "Components/SetGoalInNode";
+import AddAlternateHSMInNode from "Components/AddAlternateHSMInNode";
 
 import events from "utils/events";
 
 import languages from "./languages.js";
 import getLanguage from "getLanguage.js";
 const language = languages[getLanguage()];
+const EMPTY_NODE_ID = "";
 
 export class HSMNodeWidget extends React.Component {
   constructor(props) {
@@ -21,6 +23,7 @@ export class HSMNodeWidget extends React.Component {
     this.changeDrag = this.changeDrag.bind(this);
     this.state = {
       canDrag: false,
+      hsmx2Id: EMPTY_NODE_ID,
     };
   }
 
@@ -135,6 +138,21 @@ export class HSMNodeWidget extends React.Component {
     return <p className="section-title">{language.buttons}</p>;
   }
 
+  renderAlternateFlowPorts = () => {
+    const { node } = this.props;
+    if (typeof node.getNotAnswerTimeoutPort !== "function") return;
+
+    const port = node.getNotAnswerTimeoutPort();
+    return (< AnswerPortWidget
+      diagramEngine={this.props.diagramEngine}
+      port={port}
+      key={port.getID()}
+      changeDrag={this.changeDrag}
+    />)
+
+  }
+
+
   renderAnswerClosedPorts() {
     const { node } = this.props;
 
@@ -142,6 +160,7 @@ export class HSMNodeWidget extends React.Component {
 
     const answerClosedPorts = node.getOrderedClosedPorts();
     if (!answerClosedPorts.length) return null;
+
     return (
       <>
         {this.renderButtonsTittle(node)}
@@ -253,7 +272,21 @@ export class HSMNodeWidget extends React.Component {
     );
   }
 
+  HSMx2Notifier(hsmx2Id) {
+    // on re-renders of this component we will check if the node still exists
+    // and if so, we don't want to render the AddAlternateHSMInNode component
+    // but if it doesn't, we'll enable rendering.
+    const diagramModel = this.props.diagramEngine.getDiagramModel();
+    const n = diagramModel.nodes[hsmx2Id];
+    if (n == undefined && this.state.hsmx2Id != EMPTY_NODE_ID)
+      this.setState({ ...this.state, hsmx2Id: EMPTY_NODE_ID });
+    else if (hsmx2Id != this.state.hsmx2Id) {
+      this.setState({ ...this.state, hsmx2Id: hsmx2Id }); // maybe not needed to avoid extra renders
+    }
+  }
+
   render() {
+    this.HSMx2Notifier(this.state.hsmx2Id);
     const { node } = this.props;
     const answerOpenPort = node.getAnswerOpenPort();
 
@@ -272,6 +305,12 @@ export class HSMNodeWidget extends React.Component {
             node={node}
             forceUpdate={this.forceUpdate.bind(this)}
           />
+          {(this.state.hsmx2Id == EMPTY_NODE_ID) && <AddAlternateHSMInNode
+            diagramEngine={this.props.diagramEngine}
+            node={node}
+            forceUpdate={this.forceUpdate.bind(this)}
+            onHsmx2Action={this.HSMx2Notifier.bind(this)}
+          />}
         </div>
         <div
           className="question-node-v2 node-v2 hsm"
@@ -287,8 +326,31 @@ export class HSMNodeWidget extends React.Component {
           {this.renderAnswerClosedPorts()}
           {this.renderDefaultClosedAnswerPort()}
           {this.renderCallToActionButtons()}
+          {!(this.state.hsmx2Id == EMPTY_NODE_ID) && this.renderAlternateFlowPorts()}
         </div>
       </div>
     );
   }
 }
+
+/*
+    // this.props.diagramEngine.getInstanceFactory(link._class).getInstance();  
+    // this.props.diagramEngine.linkInstanceFactory
+    let diagramModel = this.props.diagramEngine.getDiagramModel();
+    let linkOb = this.props.diagramEngine.linkInstanceFactory.getInstance();
+
+    console.log(this.props.diagramEngine);
+    console.log(linkOb);
+    console.log(this.props.node.ports)
+    let [srcPort] = Object.values(this.props.node.ports).filter((port) => port.answerType == 'TIMEOUT');
+    let [tgtPort] = Object.values(diagramModel.getNode(this.state.hsmx2Id).ports).filter((port) => port.name == 'input')
+    //console.log(src);
+    //console.log(tgt);
+    linkOb.setSourcePort(srcPort);
+    linkOb.setTargetPort(tgtPort);
+    diagramModel.addLink(linkOb);
+    diagramModel.activateHistory();
+    diagramModel.pushToHistory();
+
+    this.forceUpdate();
+*/
