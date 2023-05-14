@@ -140,7 +140,20 @@ export class HSMNodeWidget extends React.Component {
 
   // TODO: Implement
   renderAlternateFlowPorts = () => {
+    const { node } = this.props;
+    if (typeof node.getNotAnswerTimeoutPort !== "function") return;
+
+    const port = node.getNotAnswerTimeoutPort();
+    return (< AnswerPortWidget
+      diagramEngine={this.props.diagramEngine}
+      port={port}
+      key={port.getID()}
+      changeDrag={this.changeDrag}
+    />)
+
   }
+
+
 
   renderAnswerClosedPorts() {
     const { node } = this.props;
@@ -262,7 +275,7 @@ export class HSMNodeWidget extends React.Component {
   }
 
   HSMx2Notifier(hsmx2Id) {
-    //on re-renders of this component we will check if the node still exists
+    // on re-renders of this component we will check if the node still exists
     // and if so, we don't want to render the AddAlternateHSMInNode component
     // but if it doesn't, we'll enable rendering.
     const diagramModel = this.props.diagramEngine.getDiagramModel();
@@ -315,6 +328,7 @@ export class HSMNodeWidget extends React.Component {
           {this.renderAnswerClosedPorts()}
           {this.renderDefaultClosedAnswerPort()}
           {this.renderCallToActionButtons()}
+          {!(this.state.hsmx2Id == EMPTY_NODE_ID) && this.renderAlternateFlowPorts()}
         </div>
       </div>
     );
