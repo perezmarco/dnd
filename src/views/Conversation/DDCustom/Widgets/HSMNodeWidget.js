@@ -138,7 +138,6 @@ export class HSMNodeWidget extends React.Component {
     return <p className="section-title">{language.buttons}</p>;
   }
 
-  // TODO: Implement
   renderAlternateFlowPorts = () => {
     const { node } = this.props;
     if (typeof node.getNotAnswerTimeoutPort !== "function") return;
@@ -152,7 +151,6 @@ export class HSMNodeWidget extends React.Component {
     />)
 
   }
-
 
 
   renderAnswerClosedPorts() {
@@ -334,3 +332,25 @@ export class HSMNodeWidget extends React.Component {
     );
   }
 }
+
+/*
+    // this.props.diagramEngine.getInstanceFactory(link._class).getInstance();  
+    // this.props.diagramEngine.linkInstanceFactory
+    let diagramModel = this.props.diagramEngine.getDiagramModel();
+    let linkOb = this.props.diagramEngine.linkInstanceFactory.getInstance();
+
+    console.log(this.props.diagramEngine);
+    console.log(linkOb);
+    console.log(this.props.node.ports)
+    let [srcPort] = Object.values(this.props.node.ports).filter((port) => port.answerType == 'TIMEOUT');
+    let [tgtPort] = Object.values(diagramModel.getNode(this.state.hsmx2Id).ports).filter((port) => port.name == 'input')
+    //console.log(src);
+    //console.log(tgt);
+    linkOb.setSourcePort(srcPort);
+    linkOb.setTargetPort(tgtPort);
+    diagramModel.addLink(linkOb);
+    diagramModel.activateHistory();
+    diagramModel.pushToHistory();
+
+    this.forceUpdate();
+*/

@@ -53,7 +53,7 @@ export const CreateHSMx2Modal = (props) => {
         wrapClassName="create-hsmx2-modal"
         visible={props.show}
         onCancel={props.closeModal}
-        closeIcon={<div class="close-icon"></div>}
+        closeIcon={<div className="close-icon"></div>}
         maskClosable={false}
         centered
         closable={true}
